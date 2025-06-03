@@ -1,0 +1,27 @@
+[
+  {
+    "title": "Open AI",
+    "image": "/content-images/OpenAI_Logo.svg",
+    "link": "https://openai.com/"
+  },
+  {
+    "title": "Claude",
+    "image": "/content-images/claude_logo.svg",
+    "link": "https://claude.ai/"
+  },
+  {
+    "title": "Gemini",
+    "image": "/content-images/gemini_logo.svg",
+    "link": "https://gemini.google.com"
+  },
+  {
+    "title": "Meta",
+    "image": "/content-images/meta_logo.svg",
+    "link": "https://business.facebook.com/"
+  },
+  {
+    "title": "AWS",
+    "image": "/content-images/AWS_logo.svg",
+    "link": "https://aws.amazon.com/"
+  }
+]
