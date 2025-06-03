@@ -10,7 +10,7 @@ const { settings } = Astro.props;
   <div class='bg-bs-surface-2 p-6 md:p-16 rounded-xl grid md:grid-cols-2 gap-8'>
     <!-- Left col -->
     <div
-      class='w-max flex flex-col gap-8 md:gap-0 justify-between text-bs-foreground-light'
+      class='w-max flex flex-col gap-8 justify-between text-bs-foreground-light'
     >
       <a
         href='/'
@@ -46,15 +46,6 @@ const { settings } = Astro.props;
       <nav class='flex flex-col'>
         {
           settings.nav
-            .sort((a, b) => a.title.localeCompare(b.title))
-            .map((item) => <a href={item.link}>{item.title}</a>)
-        }
-      </nav>
-
-      <!-- Social links -->
-      <nav class='flex flex-col'>
-        {
-          settings.social_links
             .sort((a, b) => a.title.localeCompare(b.title))
             .map((item) => <a href={item.link}>{item.title}</a>)
         }
