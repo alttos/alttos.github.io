@@ -1,4 +1,6 @@
 ---
+import Logo from '../assets/theme-images/logo3.png';
+
 const { settings } = Astro.props;
 ---
 
@@ -11,6 +13,13 @@ const { settings } = Astro.props;
       aria-label={settings.title + ' - Home'}
       class='flex items-center gap-2'
     >
+      <img
+        src={Logo.src}
+        loading='lazy'
+        class='group-hover:-rotate-180 group-hover:scale-80 transition-transform ease-bs-spring duration-1000 rounded-full cursor-pointer'
+        height='48'
+        width='48'
+      />
       <span class='text-white text-2xl font-bold'
         >ALTTOS <span
           class='bg-gradient-to-r from-blue-500 via-cyan-400 to-green-400 bg-clip-text text-transparent'
