@@ -1,10 +1,13 @@
 {
-  "lang": "en",
+  "lang": "es",
   "dir": "ltr",
-  "name": "blackspike astro landing page",
-  "description": "A free Astro landing theme made with Tailwind to help kick start your Astro website.",
-  "short_name": "blackspike astro theme",
+  "name": "Alttos | Automatización con IA para tu negocio",
+  "short_name": "Alttos",
+  "description": "Implementamos agentes de IA 24/7 para automatizar procesos, responder consultas, atender llamadas y agendar citas, optimizando tus recursos y mejorando la experiencia del cliente.",
   "theme_color": "#18181B",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/",
   "icons": [
     {
       "src": "/192.png",
