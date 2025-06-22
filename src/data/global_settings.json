@@ -1,6 +1,7 @@
 {
   "title": "Alttos AI",
-  "description": "Empoderamos empresas usando tecnología de punta para que alcancén su máximo potencial.",
+  "description": "Empoderamos empresas con tecnología de punta para alcanzar su máximo potencial.",
+  "logo": "/alttos-logo.svg",
   "social_image": "/preview_link_image.png",
   "base_url": "https://alttos.ai",
   "demo": {
