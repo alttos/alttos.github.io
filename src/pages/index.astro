@@ -4,6 +4,7 @@ import Layout from '../layouts/Layout.astro';
 import ClientsSection from '../components/ClientsSection.astro';
 import ServicesCarousel from '../components/ServicesCarousel.astro';
 import HeroSection from '../components/HeroSection.astro';
+import BenefitsSection from '../components/BenefitsSection.astro';
 
 import clients from '../data/clients.json';
 import services from '../data/services.json';
@@ -17,6 +18,8 @@ import global_settings from '../data/global_settings.json';
     settings={global_settings}
     title={home.hero_title}
   />
+
+  <BenefitsSection />
 
   <ServicesCarousel services={services} title={home.services_title} />
 

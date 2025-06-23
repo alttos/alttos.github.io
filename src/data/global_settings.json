@@ -12,11 +12,11 @@
   "theme_color": "#18181b",
   "nav": [
     {
-      "title": "Demos",
+      "title": "Servicios",
       "link": "/#services"
     },
     {
-      "title": "Servicios",
+      "title": "Demos",
       "link": "/#services"
     },
     {

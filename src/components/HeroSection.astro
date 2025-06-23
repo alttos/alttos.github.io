@@ -5,7 +5,9 @@ import hero_screens from '../assets/theme-images/hero-screen.png';
 const { settings, title, content } = Astro.props;
 ---
 
-<section class='bs-container py-6 flex flex-col lg:flex-row items-center'>
+<section
+  class='bs-container py-6 flex flex-col lg:flex-row items-center justify-between'
+>
   <!-- Content -->
   <div class='flex flex-col gap-6 lg:max-w-lg w-full py-16'>
     <!-- Title -->
@@ -30,15 +32,15 @@ const { settings, title, content } = Astro.props;
     </button>
   </div>
 
-  <!-- Image -->
-  <figure class='flex place-content-center lg:mt-0'>
+  <!-- Image (solo visible en desktop) -->
+  <figure class='hidden lg:flex place-content-center lg:mt-0'>
     <Image
       src={hero_screens}
       format='avif'
       quality='high'
       alt='Screens showing phone, tablet and desktop views of our website'
       loading='eager'
-      class='w-[90%] lg:w-[70%] animate-float'
+      class='w-[90%] lg:w-[70%] animate-float max-h-[400px] md:max-h-[300px] lg:max-h-[800px] object-contain'
     />
   </figure>
 </section>

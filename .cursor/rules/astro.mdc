@@ -1,0 +1,40 @@
+---
+description: 
+globs: astro.config.mjs
+alwaysApply: false
+---
+# Cursor Rule: Astro
+
+**Description:**
+Astro is a modern static site builder that delivers lightning-fast websites. `.astro` components can import and use UI components from frameworks like React, Vue, or Svelte, but HTML and CSS are rendered statically whenever possible.
+
+- Page files go in `src/pages/`.
+- Reusable components go in `src/components/`.
+- Global styles are placed in `src/assets/css/` or `src/styles/`.
+- Use static data via `Astro.fetchContent` or by importing JSON files.
+- Prefer scoped `<style>` tags in components, or use global CSS in separate files.
+- Use relative paths for images and assets.
+
+**Best Practices:**
+- Keep components small and focused.
+- Use slots for flexible content.
+- Prefer explicit props in components.
+- Leverage static generation whenever possible.
+
+**Example Structure:**
+```plaintext
+src/
+  pages/
+    index.astro
+    about.astro
+  components/
+    Header.astro
+    Footer.astro
+  assets/
+    css/
+      global.css
+```
+
+**References:**
+- [Astro Documentation](https://docs.astro.build/)
+- [Astro Integrations Guide](https://docs.astro.build/en/guides/integrations-guide/)

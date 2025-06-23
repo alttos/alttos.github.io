@@ -1,0 +1,38 @@
+---
+const benefits = [
+  {
+    title: '99.8%',
+    subtitle: 'Precisión en respuestas',
+    description:
+      'Precisión en respuestas para una atención confiable y eficiente.',
+  },
+  {
+    title: '24/7',
+    subtitle: 'Disponibilidad y atención',
+    description: 'Atención continua para tus clientes en cualquier momento.',
+  },
+  {
+    title: '+60%',
+    subtitle: 'Reducción de costos',
+    description: 'Optimiza recursos y reduce costos operativos con IA.',
+  },
+];
+---
+
+<section class='bs-container grid grid-cols-1 md:grid-cols-3 gap-6'>
+  {
+    benefits.map((benefit) => (
+      <div class='flex flex-col items-start justify-center bg-bs-surface-2/70 rounded-xl p-8 shadow-lg min-h-[9rem]'>
+        <div class='text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-500 via-cyan-400 to-green-400 bg-clip-text text-transparent mb-1'>
+          {benefit.title}
+        </div>
+        <div class='text-lg md:text-xl font-semibold text-bs-foreground-light mb-1'>
+          {benefit.subtitle}
+        </div>
+        <p class='bs-body-text text-bs-foreground-dark mt-1'>
+          {benefit.description}
+        </p>
+      </div>
+    ))
+  }
+</section>
