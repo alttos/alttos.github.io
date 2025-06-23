@@ -21,9 +21,11 @@ const { title, description } = Astro.props;
 
 const jsonLD = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
-  url: global_settings.base_url,
+  '@type': 'SoftwareApplication',
   name: global_settings.title,
+  description: global_settings.description,
+  url: global_settings.base_url,
+  applicationCategory: 'BusinessApplication',
   logo: `${global_settings.base_url}${global_settings.logo}`,
   sameAs: [],
 };
@@ -68,6 +70,15 @@ const jsonLD = {
       content={global_settings.base_url + global_settings.social_image}
     />
     <meta property='og:site_name' content={global_settings.title} />
+    <meta
+      name='twitter:card'
+      content={global_settings.base_url + global_settings.social_image}
+    />
+    <meta name='twitter:title' content={title ?? global_settings.title} />
+    <meta
+      name='twitter:description'
+      content={description ?? global_settings.description}
+    />
 
     <script type='application/ld+json' set:html={JSON.stringify(jsonLD)} />
 
