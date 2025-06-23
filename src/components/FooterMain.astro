@@ -45,9 +45,9 @@ const { settings } = Astro.props;
       <!-- Nav -->
       <nav class='flex flex-col'>
         {
-          settings.nav
-            .sort((a, b) => a.title.localeCompare(b.title))
-            .map((item) => <a href={item.link}>{item.title}</a>)
+          settings.nav.map((item: { title: string; link: string }) => (
+            <a href={item.link}>{item.title}</a>
+          ))
         }
       </nav>
     </div>
