@@ -69,64 +69,63 @@ function closeMenu() {
         ))
       }
     </nav>
-
-    <!-- Menú mobile (panel lateral) -->
-    <div
-      id='mobileMenu'
-      class='hidden fixed inset-0 z-[1100] md:hidden bg-black/60'
-      style='backdrop-filter: blur(2px);'
-      aria-hidden='true'
-    >
-      <aside
-        class='absolute right-0 top-0 h-full w-4/5 max-w-xs bg-bs-surface-1 shadow-lg flex flex-col p-6 gap-8 transition-all duration-300 translate-x-0 z-[1200]'
-        onclick='event.stopPropagation()'
-      >
-        <!-- Botón cerrar -->
-        <button
-          class='absolute top-4 right-4 p-2 rounded-full hover:bg-bs-surface-2 transition-colors'
-          aria-label='Cerrar menú'
-          onclick="document.getElementById('mobileMenu').classList.add('hidden')"
-          type='button'
-        >
-          <svg
-            width='24'
-            height='24'
-            fill='none'
-            stroke='white'
-            stroke-width='2'
-            stroke-linecap='round'
-            stroke-linejoin='round'
-            ><line x1='18' y1='6' x2='6' y2='18'></line><line
-              x1='6'
-              y1='6'
-              x2='18'
-              y2='18'></line></svg
-          >
-        </button>
-        <!-- Links -->
-        <nav class='flex flex-col gap-4 mt-8'>
-          {
-            settings.nav.map((item: NavItem) => (
-              <a
-                class='bs-btn !bg-transparent text-lg py-3 px-2 text-left'
-                href={item.link}
-                onclick="document.getElementById('mobileMenu').classList.add('hidden')"
-              >
-                {item.title}
-              </a>
-            ))
-          }
-        </nav>
-      </aside>
-      <!-- Overlay para cerrar -->
-      <div
-        class='absolute inset-0'
-        onclick="document.getElementById('mobileMenu').classList.add('hidden')"
-      >
-      </div>
-    </div>
   </div>
 </header>
+
+<div
+  id='mobileMenu'
+  class='hidden fixed inset-0 z-[1200] md:hidden'
+  style='background-color: rgba(24,24,27,0.85);'
+  aria-hidden='true'
+>
+  <aside
+    class='absolute right-0 top-0 h-full w-4/5 max-w-xs bg-bs-surface-1 shadow-lg flex flex-col p-6 gap-8 transition-all duration-300 translate-x-0 z-[1200]'
+    onclick='event.stopPropagation()'
+  >
+    <!-- Botón cerrar -->
+    <button
+      class='absolute top-4 right-4 p-2 rounded-full hover:bg-bs-surface-2 transition-colors'
+      aria-label='Cerrar menú'
+      onclick="document.getElementById('mobileMenu').classList.add('hidden')"
+      type='button'
+    >
+      <svg
+        width='24'
+        height='24'
+        fill='none'
+        stroke='white'
+        stroke-width='2'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+        ><line x1='18' y1='6' x2='6' y2='18'></line><line
+          x1='6'
+          y1='6'
+          x2='18'
+          y2='18'></line></svg
+      >
+    </button>
+    <!-- Links -->
+    <nav class='flex flex-col gap-4 mt-8'>
+      {
+        settings.nav.map((item: NavItem) => (
+          <a
+            class='bs-btn !bg-transparent text-lg py-3 px-2 text-left'
+            href={item.link}
+            onclick="document.getElementById('mobileMenu').classList.add('hidden')"
+          >
+            {item.title}
+          </a>
+        ))
+      }
+    </nav>
+  </aside>
+  <!-- Overlay para cerrar -->
+  <div
+    class='absolute inset-0'
+    onclick="document.getElementById('mobileMenu').classList.add('hidden')"
+  >
+  </div>
+</div>
 
 <script is:inline>
   if (typeof window !== 'undefined') {
