@@ -1,5 +1,6 @@
 ---
 import Arrow from '../assets/theme-images/icon-arrow.svg';
+import type { ServiceItem } from '../types/services';
 
 const { title, services } = Astro.props;
 ---
@@ -41,7 +42,7 @@ const { title, services } = Astro.props;
   <div class='js-fc-swiper swiper select-none bs-mt-md'>
     <div class='swiper-wrapper'>
       {
-        services.map((item) => (
+        services.map((item: ServiceItem) => (
           // Slides
 
           <div class='swiper-slide bg-bs-surface-0 border border-bs-surface-3 rounded-xl overflow-hidden !h-auto'>

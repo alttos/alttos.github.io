@@ -1,4 +1,5 @@
 ---
+import type { ClientItem } from '../types/clients';
 const { title, clients } = Astro.props;
 ---
 
@@ -7,14 +8,12 @@ const { title, clients } = Astro.props;
   {title && <h2 class='bs-h2 text-center' set:html={title} />}
 
   <!-- Logos -->
-  <div
-    class='bs-mt-md grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 place-content-center gap-4'
-  >
+  <div class='bs-mt-md flex flex-wrap justify-center gap-4'>
     <!-- Logo link -->
     {
-      clients.map((item) => (
+      clients.map((item: ClientItem) => (
         <a
-          class='group py-10 px-5 rounded-xl flex place-content-center bg-bs-surface-2/70 hover:bg-bs-surface-2 transition-colors duration-300'
+          class='group py-10 px-5 rounded-xl flex place-content-center bg-bs-surface-2/70 hover:bg-bs-surface-2 transition-colors duration-300 flex-1 min-w-[140px] max-w-[270px] basis-1/5'
           href={item.link}
           target='_blank'
         >
