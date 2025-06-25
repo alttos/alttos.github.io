@@ -5,9 +5,9 @@
   "social_image": "/content-images/preview_link_image.png",
   "base_url": "https://alttos.ai",
   "demo": {
-    "title": "Habla con nuestros expertos",
-    "content": "<strong>Get a guided tour through our services</strong>, and find out how you and your team can change the way you work, forever.",
-    "cta": "Agenda una demo"
+    "title": "Habla con un experto",
+    "content": "Nuestro equipo está comprometido en llevar tu negocio al siguiente nivel. <br><span/><br>Uno de nuestros expertos se pondrá en contacto contigo lo antes posible para brindarte una atención personalizada y resolver todas tus inquietudes.",
+    "cta": "Solicita contacto"
   },
   "theme_color": "#18181b",
   "nav": [

@@ -29,7 +29,7 @@ const { settings, title, content, phoneNumber } = Astro.props;
       class='bs-btn bs-btn-cta self-start bs-mt-sm'
       data-phone-number={phoneNumber}
     >
-      {settings.demo.cta}
+      Agenda una demo
     </button>
   </div>
 
@@ -53,7 +53,7 @@ const { settings, title, content, phoneNumber } = Astro.props;
     const btn = document.getElementById('whatsapp-cta-btn');
     if (btn) {
       btn.addEventListener('click', () => {
-        sendWhasappMessage('573332390022', message);
+        sendWhasappMessage(message);
       });
     }
   });
