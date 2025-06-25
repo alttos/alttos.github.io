@@ -16,6 +16,7 @@ import DialogModal from '../components/DialogModal.astro';
 import FooterMain from '../components/FooterMain.astro';
 import HeaderMain from '../components/HeaderMain.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
+import ChatWidget from '../components/ChatWidget.astro';
 
 const { title, description } = Astro.props;
 
@@ -120,7 +121,10 @@ const jsonLD = {
     <DialogModal id='demo' content={global_settings.demo} />
 
     <!-- WhatsApp Button -->
-    <WhatsAppButton phoneNumber='573332390022' />
+    <div class='fixed bottom-6 right-6 z-50 flex flex-col gap-4'>
+      <WhatsAppButton phoneNumber='573332390022' />
+      <ChatWidget />
+    </div>
 
     <script>
       import basicParallax from '../utils/ui/basic-parallax';

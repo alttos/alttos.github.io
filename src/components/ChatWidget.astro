@@ -1,0 +1,351 @@
+---
+// Astro: componente de chat flotante con grabación de audio y mensajes de texto
+const AGENT_NAME = 'Alttos AI';
+const AGENT_AVATAR = '/alttos-logo.svg';
+const USER_AVATAR = 'https://ui-avatars.com/api/?name=User';
+const WEBHOOK_URL = 'https://tu-webhook-n8n.com'; // Cambia por tu endpoint real
+---
+
+<!-- Botón flotante de chat (más separado del borde inferior, debajo del de WhatsApp) -->
+<button
+  id='chat-fab'
+  class='chatwidget-btn relative bg-violet-500 hover:bg-violet-600 text-white p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center'
+  aria-label='Abrir chat IA'
+>
+  <svg width='28' height='28' fill='none' viewBox='0 0 24 24'
+    ><path
+      d='M12 22c5.523 0 10-4.03 10-9s-4.477-9-10-9S2 3.03 2 8c0 2.21 1.21 4.19 3.17 5.5L4 20l6.5-2.5c.5.09 1.02.14 1.5.14z'
+      fill='currentColor'></path></svg
+  >
+</button><!-- Ventana de chat -->
+<div id='chat-widget' style='display:none;'>
+  <div
+    class='fixed bottom-6 right-6 z-50 w-[350px] max-w-[95vw] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-fade-in border border-bs-surface-3'
+  >
+    <!-- Cabecera -->
+    <div
+      class='flex items-center gap-3 px-4 py-3 bg-violet-500 text-white rounded-t-2xl relative'
+    >
+      <img
+        src={AGENT_AVATAR}
+        alt='Agente'
+        class='w-8 h-8 rounded-full border-2 border-white'
+      />
+      <span class='font-semibold text-lg'>{AGENT_NAME}</span>
+      <button
+        class='ml-auto p-1 rounded-full hover:bg-violet-600 transition'
+        aria-label='Cerrar chat'
+        id='chat-close-btn'
+      >
+        <svg
+          width='24'
+          height='24'
+          fill='none'
+          stroke='white'
+          stroke-width='2'
+          stroke-linecap='round'
+          stroke-linejoin='round'
+          ><line x1='18' y1='6' x2='6' y2='18'></line><line
+            x1='6'
+            y1='6'
+            x2='18'
+            y2='18'></line></svg
+        >
+      </button>
+    </div>
+    <!-- Mensajes -->
+    <div
+      id='chat-messages'
+      class='flex-1 flex flex-col gap-2 px-4 py-3 overflow-y-auto bg-bs-surface-1'
+      style='min-height: 320px; max-height: 520px;'
+    >
+      <!-- Mensajes se renderizan por JS -->
+    </div>
+    <!-- Input -->
+    <div
+      class='flex items-center gap-2 px-4 py-3 bg-white border-t border-bs-surface-3'
+    >
+      <textarea
+        id='chat-input'
+        class='flex-1 resize-none rounded-lg border border-bs-surface-3 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-400'
+        rows='1'
+        placeholder='Escribe un mensaje...'
+        style='min-height: 36px; max-height: 80px;'></textarea>
+      <button
+        id='chat-mic-btn'
+        class='p-2 rounded-full hover:bg-violet-100 transition'
+        aria-label='Grabar audio'
+        style='color: #7c3aed;'
+      >
+        <svg
+          id='mic-icon'
+          width='24'
+          height='24'
+          fill='none'
+          viewBox='0 0 24 24'
+          ><path
+            d='M12 18c3.314 0 6-2.686 6-6V8a6 6 0 10-12 0v4c0 3.314 2.686 6 6 6z'
+            fill='currentColor'></path><path
+            d='M19 19v-2a7 7 0 10-14 0v2'
+            stroke='currentColor'
+            stroke-width='2'
+            stroke-linecap='round'></path></svg
+        >
+      </button>
+      <button
+        id='chat-send-btn'
+        class='p-2 rounded-full hover:bg-violet-100 transition'
+        aria-label='Enviar mensaje'
+        style='color: #7c3aed;'
+      >
+        <svg width='24' height='24' fill='none' viewBox='0 0 24 24'
+          ><path d='M2 21l21-9-21-9v7l15 2-15 2z' fill='currentColor'
+          ></path></svg
+        >
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .animate-fade-in {
+    animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(40px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  .dot-flashing {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+    margin-right: 6px;
+    animation: dotFlashing 1s infinite linear alternate;
+    display: inline-block;
+  }
+
+  .chatwidget-btn::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    background-color: var(--color-violet-500, oklch(60.6% 0.25 292.717));
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    z-index: -1;
+  }
+
+  @keyframes dotFlashing {
+    0% {
+      opacity: 0.2;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.2;
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+</style>
+
+<script is:inline>
+  const AGENT_NAME = 'Alttos AI';
+  const AGENT_AVATAR = '/alttos-logo.svg';
+  const USER_AVATAR = 'https://ui-avatars.com/api/?name=User';
+  const WEBHOOK_URL = 'https://tu-webhook-n8n.com';
+
+  let messages = [
+    { from: 'agent', text: '¡Hola! ¿En qué puedo ayudarte hoy?' },
+  ];
+  let isAgentTyping = false;
+  let isRecording = false;
+  let mediaRecorder = null;
+  let audioChunks = [];
+
+  function renderMessages() {
+    const chat = document.getElementById('chat-messages');
+    if (!chat) return;
+    chat.innerHTML = '';
+    messages.forEach((msg) => {
+      const row = document.createElement('div');
+      row.className = `flex ${msg.from === 'user' ? 'justify-end' : 'justify-start'} items-end gap-2`;
+      if (msg.from === 'agent') {
+        const avatar = document.createElement('img');
+        avatar.src = AGENT_AVATAR;
+        avatar.alt = 'Agente';
+        avatar.className = 'w-6 h-6 rounded-full';
+        row.appendChild(avatar);
+      }
+      const bubble = document.createElement('div');
+      bubble.className = `px-3 py-2 rounded-xl text-sm max-w-[75%] ${msg.from === 'user' ? 'bg-violet-100 text-gray-900' : 'bg-violet-500 text-white'}`;
+      bubble.textContent = msg.text;
+      row.appendChild(bubble);
+      if (msg.from === 'user') {
+        const avatar = document.createElement('img');
+        avatar.src = USER_AVATAR;
+        avatar.alt = 'Tú';
+        avatar.className = 'w-6 h-6 rounded-full';
+        row.appendChild(avatar);
+      }
+      chat.appendChild(row);
+    });
+    if (isAgentTyping) {
+      const row = document.createElement('div');
+      row.className = 'flex items-end gap-2';
+      const avatar = document.createElement('img');
+      avatar.src = AGENT_AVATAR;
+      avatar.alt = 'Agente';
+      avatar.className = 'w-6 h-6 rounded-full';
+      row.appendChild(avatar);
+      const bubble = document.createElement('div');
+      bubble.className =
+        'px-3 py-2 rounded-xl bg-violet-500 text-white text-sm flex items-center gap-1';
+      const dot = document.createElement('span');
+      dot.className = 'dot-flashing';
+      bubble.appendChild(dot);
+      bubble.appendChild(document.createTextNode('Escribiendo...'));
+      row.appendChild(bubble);
+      chat.appendChild(row);
+    }
+    chat.scrollTop = chat.scrollHeight;
+  }
+
+  function openChat() {
+    document.getElementById('chat-widget').style.display = 'block';
+    document.getElementById('chat-fab').style.display = 'none';
+    renderMessages();
+  }
+  function closeChat() {
+    document.getElementById('chat-widget').style.display = 'none';
+    document.getElementById('chat-fab').style.display = 'flex';
+  }
+
+  async function startRecording() {
+    if (!navigator.mediaDevices) return;
+    isRecording = true;
+    updateMicIcon();
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    mediaRecorder = new window.MediaRecorder(stream);
+    audioChunks = [];
+    mediaRecorder.ondataavailable = (e) => {
+      if (e.data.size > 0) audioChunks.push(e.data);
+    };
+    mediaRecorder.onstop = () => {
+      const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+      sendAudio(audioBlob);
+      isRecording = false;
+      updateMicIcon();
+    };
+    mediaRecorder.start();
+  }
+  function stopRecording() {
+    if (mediaRecorder) mediaRecorder.stop();
+  }
+  function updateMicIcon() {
+    const micIcon = document.getElementById('mic-icon');
+    if (!micIcon) return;
+    if (isRecording) {
+      micIcon.outerHTML =
+        '<svg id="mic-icon" width="24" height="24" fill="none" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="3" fill="currentColor"/></svg>';
+    } else {
+      micIcon.outerHTML =
+        '<svg id="mic-icon" width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M12 18c3.314 0 6-2.686 6-6V8a6 6 0 10-12 0v4c0 3.314 2.686 6 6 6z" fill="currentColor"/><path d="M19 19v-2a7 7 0 10-14 0v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+    }
+  }
+  function sendAudio(audioBlob) {
+    messages.push({ from: 'user', text: '[Audio enviado]' });
+    isAgentTyping = true;
+    renderMessages();
+    const formData = new FormData();
+    formData.append('audio', audioBlob, 'audio.webm');
+    fetch(WEBHOOK_URL, {
+      method: 'POST',
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        messages.push({ from: 'agent', text: data.reply || 'Recibido.' });
+        isAgentTyping = false;
+        renderMessages();
+      })
+      .catch(() => {
+        messages.push({
+          from: 'agent',
+          text: 'Hubo un error al enviar el audio.',
+        });
+        isAgentTyping = false;
+        renderMessages();
+      });
+  }
+
+  function sendTextMessage() {
+    const input = document.getElementById('chat-input');
+    const text = input.value.trim();
+    if (!text) return;
+    messages.push({ from: 'user', text });
+    input.value = '';
+    isAgentTyping = true;
+    renderMessages();
+    fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: text }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        messages.push({ from: 'agent', text: data.reply || 'Recibido.' });
+        isAgentTyping = false;
+        renderMessages();
+      })
+      .catch(() => {
+        messages.push({
+          from: 'agent',
+          text: 'Hubo un error al enviar el mensaje.',
+        });
+        isAgentTyping = false;
+        renderMessages();
+      });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('chat-fab').onclick = openChat;
+    document.getElementById('chat-close-btn').onclick = closeChat;
+    document.getElementById('chat-mic-btn').onclick = () => {
+      if (isRecording) {
+        stopRecording();
+      } else {
+        startRecording();
+      }
+    };
+    document.getElementById('chat-send-btn').onclick = sendTextMessage;
+    document
+      .getElementById('chat-input')
+      .addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          sendTextMessage();
+        }
+      });
+    renderMessages();
+  });
+</script>
