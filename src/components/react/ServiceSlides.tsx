@@ -5,15 +5,14 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import ServiceSlide from './ServiceSlide';
 import Arrow from '../../assets/theme-images/icon-arrow.svg?react';
+import type { ServiceItem } from './ServiceSlide';
 
-/**
- * @typedef {import('./ServiceSlide').ServiceItem} ServiceItem
- */
+interface ServiceSlidesProps {
+  services: ServiceItem[];
+  title: string;
+}
 
-/**
- * @param {{ services: ServiceItem[], title?: string }} props
- */
-function ServiceSlides({ services, title }) {
+const ServiceSlides = ({ services, title }: ServiceSlidesProps) => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
 
@@ -55,8 +54,6 @@ function ServiceSlides({ services, title }) {
       {/* Slides */}
       <Swiper
         modules={[Navigation]}
-        slidesPerView={1.5}
-        spaceBetween={8}
         speed={500}
         loop={true}
         centeredSlides={true}
@@ -70,23 +67,23 @@ function ServiceSlides({ services, title }) {
           swiper.navigation.update();
         }}
         breakpoints={{
-          640: {
-            slidesPerView: 1.2,
-            spaceBetween: 32,
+          300: {
+            slidesPerView: 1.1,
+            spaceBetween: 8,
           },
-          1600: {
-            slidesPerView: 1.4,
-            spaceBetween: 32,
+          600: {
+            slidesPerView: 1.3,
+            spaceBetween: 16,
           },
-          1900: {
-            slidesPerView: 2,
+          1024: {
+            slidesPerView: 1.5,
             spaceBetween: 32,
           },
         }}
         className='js-fc-swiper swiper select-none bs-mt-md'
         wrapperClass='swiper-wrapper'
       >
-        {services.map((item, idx) => (
+        {services.map((item: ServiceItem, idx) => (
           <SwiperSlide key={idx}>
             <ServiceSlide {...item} />
           </SwiperSlide>
@@ -94,6 +91,6 @@ function ServiceSlides({ services, title }) {
       </Swiper>
     </section>
   );
-}
+};
 
 export default ServiceSlides;

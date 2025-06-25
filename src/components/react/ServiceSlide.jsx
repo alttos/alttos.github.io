@@ -1,4 +1,4 @@
-import React from 'react';
+import { sendWhasappMessage } from '../../utils/functions/whatasapp';
 
 /**
  * @typedef {Object} ServiceItem
@@ -8,6 +8,7 @@ import React from 'react';
  * @property {string} image_alt
  * @property {string} image_content
  * @property {string} cta
+ * @property {string} message
  */
 
 /**
@@ -20,6 +21,7 @@ function ServiceSlide({
   image_alt,
   image_content,
   cta,
+  message,
 }) {
   return (
     <div className='swiper-slide bg-bs-surface-0 border border-bs-surface-3 rounded-xl overflow-hidden !h-auto'>
@@ -59,7 +61,7 @@ function ServiceSlide({
           <button
             type='button'
             className='bs-btn bs-btn-cta inline-block self-start bs-mt-sm'
-            // Aquí puedes agregar la lógica de CTA (por ejemplo, abrir modal o WhatsApp)
+            onClick={() => sendWhasappMessage(message)}
           >
             {cta}
           </button>
