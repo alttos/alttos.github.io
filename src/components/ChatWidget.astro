@@ -8,23 +8,23 @@ const WEBHOOK_URL = 'https://tu-webhook-n8n.com'; // Cambia por tu endpoint real
 
 <!-- Botón flotante de chat (más separado del borde inferior, debajo del de WhatsApp) -->
 <button
-  id='chat-fab'
+  id='chat-button'
   class='chatwidget-btn relative cursor-pointer max-auto bg-violet-500 hover:bg-violet-600 text-white p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center'
   aria-label='Abrir chat IA'
 >
   <img
-    id='chat-fab-icon'
+    id='chat-button-icon'
     src='/icons/call-center.png'
     class='w-7 icon-invert'
   />
 </button>
 <!-- Ventana de chat -->
 <div id='chat-widget' style='display:none;'>
-  <!-- <div
+  <div
     class='fixed bottom-6 right-6 z-50 w-[350px] max-w-[95vw] rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-fade-in border'
-  > -->
-  <!-- Cabecera -->
-  <!-- <div
+  >
+    <!-- Cabecera -->
+    <div
       class='flex items-center gap-3 px-4 py-3 bg-violet-500 text-white rounded-t-2xl relative'
     >
       <img
@@ -53,26 +53,26 @@ const WEBHOOK_URL = 'https://tu-webhook-n8n.com'; // Cambia por tu endpoint real
             y2='18'></line></svg
         >
       </button>
-    </div> -->
-  <!-- Mensajes -->
-  <!-- <div
+    </div>
+    <!-- Mensajes -->
+    <!-- <div
     id='chat-messages'
     class='flex-1 flex flex-col gap-2 px-4 py-3 overflow-y-auto bg-bs-surface-3 blur-xl'
     style='min-height: 320px; max-height: 520px;'
   > -->
-  <!-- Mensajes se renderizan por JS -->
-  <!-- </div> -->
-  <!-- Input -->
-  <!-- <div
+    <!-- Mensajes se renderizan por JS -->
+    <!-- </div> -->
+    <!-- Input -->
+    <!-- <div
       class='flex items-center gap-2 px-4 py-3 bg-white border-t border-bs-surface-3'
     > -->
-  <!-- <textarea
+    <!-- <textarea
         id='chat-input'
         class='flex-1 resize-none rounded-lg border border-bs-surface-3 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-400'
         rows='1'
         placeholder='Escribe un mensaje...'
         style='min-height: 36px; max-height: 80px;'></textarea> -->
-  <!-- <button
+    <!-- <button
         id='chat-mic-btn'
         class='p-2 rounded-full hover:bg-violet-100 transition'
         aria-label='Grabar audio'
@@ -93,7 +93,7 @@ const WEBHOOK_URL = 'https://tu-webhook-n8n.com'; // Cambia por tu endpoint real
             stroke-linecap='round'></path></svg
         >
       </button> -->
-  <!-- <button
+    <!-- <button
         id='chat-send-btn'
         class='p-2 rounded-full hover:bg-violet-100 transition'
         aria-label='Enviar mensaje'
@@ -104,7 +104,7 @@ const WEBHOOK_URL = 'https://tu-webhook-n8n.com'; // Cambia por tu endpoint real
           ></path></svg
         >
       </button> -->
-  <!-- </div> -->
+  </div>
 </div>
 
 <style>
@@ -139,7 +139,7 @@ const WEBHOOK_URL = 'https://tu-webhook-n8n.com'; // Cambia por tu endpoint real
     top: 0;
     left: 0;
     border-radius: 50%;
-    background-color: rgba(34, 197, 94, 0.3);
+    background-color: rgba(124, 58, 237, 0.25);
     animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     z-index: -1;
   }
@@ -234,15 +234,15 @@ const WEBHOOK_URL = 'https://tu-webhook-n8n.com'; // Cambia por tu endpoint real
   //   chat.scrollTop = chat.scrollHeight;
   // }
 
-  // function openChat() {
-  //   document.getElementById('chat-widget').style.display = 'block';
-  //   document.getElementById('chat-fab').style.display = 'none';
-  //   renderMessages();
-  // }
-  // function closeChat() {
-  //   document.getElementById('chat-widget').style.display = 'none';
-  //   document.getElementById('chat-fab').style.display = 'flex';
-  // }
+  function openChat() {
+    document.getElementById('chat-widget').style.display = 'block';
+    document.getElementById('chat-button').style.display = 'none';
+    renderMessages();
+  }
+  function closeChat() {
+    document.getElementById('chat-widget').style.display = 'none';
+    document.getElementById('chat-button').style.display = 'flex';
+  }
 
   // async function startRecording() {
   //   if (!navigator.mediaDevices) return;
@@ -331,24 +331,28 @@ const WEBHOOK_URL = 'https://tu-webhook-n8n.com'; // Cambia por tu endpoint real
   //     });
   // }
 
-  // document.addEventListener('DOMContentLoaded', () => {
-  //   document.getElementById('chat-fab').onclick = openChat;
-  //   document.getElementById('chat-close-btn').onclick = closeChat;
-  //   document.getElementById('chat-mic-btn').onclick = () => {
-  //     if (isRecording) {
-  //       stopRecording();
-  //     } else {
-  //       startRecording();
-  //     }
-  //   };
-  //   document.getElementById('chat-send-btn').onclick = sendTextMessage;
-  //   document
-  //     .getElementById('chat-input')
-  //     .addEventListener('keydown', function (e) {
-  //       if (e.key === 'Enter' && !e.shiftKey) {
-  //         e.preventDefault();
-  //         sendTextMessage();
-  //       }
-  //     });
-  //   renderMessages();
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('chat-button').onclick = openChat;
+    document.getElementById('chat-close-btn').onclick = closeChat;
+
+    document.getElementById('chat-mic-btn').onclick = () => {
+      if (isRecording) {
+        stopRecording();
+      } else {
+        startRecording();
+      }
+    };
+
+    document.getElementById('chat-send-btn').onclick = sendTextMessage;
+
+    document
+      .getElementById('chat-input')
+      .addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          sendTextMessage();
+        }
+      });
+    renderMessages();
+  });
 </script>
