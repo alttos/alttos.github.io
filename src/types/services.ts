@@ -5,4 +5,5 @@ export interface ServiceItem {
   image_content: string;
   content: string;
   cta: string;
+  message: string;
 }

@@ -2,18 +2,20 @@
   {
     "title": "Automatización de Atención al Cliente por WhatsApp & Telegram",
     "content": "Implementamos <strong>agentes de IA 24/7</strong> que responden consultas de forma instantánea y natural, liberando a tu equipo de tareas repetitivas. <strong>Ningún mensaje queda sin respuesta</strong>, incluso fuera de horario, mejorando la experiencia del cliente y la reputación de tu marca. Al delegar preguntas frecuentes—estado de pedidos, información de productos o citas—a un chatbot inteligente, reduces la necesidad de múltiples operadores y <strong>optimizas tus recursos</strong>. El soporte inmediato <strong>impulsa las ventas</strong>, ya que los usuarios finalizan sus compras sin dudas. Nuestra solución escala con tu negocio y personaliza conversaciones según cada segmento, garantizando que cada cliente reciba una <strong>atención precisa y coherente</strong>, combinando eficiencia tecnológica y cercanía humana.",
-    "cta": "Prueba una demo",
+    "cta": "Agenda una demo",
     "image_content": "/content-images/chatbot.png",
     "image": "/content-images/blackspike-wallpaper-01.avif",
-    "image_alt": ""
+    "image_alt": "",
+    "message": "¡Hola!, me gustaría agendar una demos de automatización de servicio al cliente."
   },
   {
     "title": "Automatización de Llamadas de Voz con IA Natural",
     "content": "Nuestro <strong>asistente de voz 24/7</strong> responde llamadas con entonación humana, agendando pedidos, reuniones y ofreciendo información o recomendaciones de producto sin interrupciones. Aprende del historial de tu negocio—horarios, preferencias y flujos de trabajo—para adaptar cada conversación al contexto y <strong>reforzar la identidad de tu marca</strong>. Con este sistema, <strong>ningún cliente queda en espera</strong>: agenda citas, toma pedidos y sugiere opciones de compra al instante, liberando a tu equipo y mejorando la <strong>percepción de calidad</strong>. Además, se integra con tu CRM y genera <strong>métricas en tiempo real</strong> para optimizar continuamente tus procesos. En pocas palabras, una solución escalable y personalizada que combina la eficiencia de la IA con la calidez de un agente humano para llevar tu atención telefónica al siguiente nivel.",
-    "cta": "Prueba una demo",
+    "cta": "Agenda una demo",
     "image_content": "/content-images/callbot.png",
     "image": "/content-images/blackspike-wallpaper-04.avif",
-    "image_alt": ""
+    "image_alt": "",
+    "message": "¡Hola!, me gustaría agendar una demos de automatización de llamadas de voz."
   },
   {
     "title": "Automatización de Procesos a Medida",
@@ -21,6 +23,7 @@
     "cta": "Agenda una reunión",
     "image_content": "/content-images/custom-flow.png",
     "image": "/content-images/blackspike-wallpaper-02.avif",
-    "image_alt": ""
+    "image_alt": "",
+    "message": "¡Hola!, me gustaría agendar una reunión para hablar sobre un proceso a medida"
   }
 ]

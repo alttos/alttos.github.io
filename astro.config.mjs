@@ -1,13 +1,17 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
+import react from '@astrojs/react';
+import svgr from 'vite-plugin-svgr';
 
 const LIVE_URL = 'https://alttos.ai';
 
 export default defineConfig({
   site: LIVE_URL,
+
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss(), svgr()],
   },
+
   experimental: {
     fonts: [
       {
@@ -56,4 +60,6 @@ export default defineConfig({
       },
     ],
   },
+
+  integrations: [react()],
 });
