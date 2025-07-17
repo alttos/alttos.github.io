@@ -1,6 +1,6 @@
 import globalSettings from '../../data/global_settings.json';
 
-const phoneNumber = globalSettings['customer-service-number'];
+const phoneNumber = globalSettings.customer_service_number;
 
 export function sendWhasappMessage(message: string) {
   if (typeof window !== 'undefined') {

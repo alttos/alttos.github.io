@@ -2,7 +2,7 @@
 import Image from 'astro/components/Image.astro';
 import hero_screens from '../assets/theme-images/hero-screen.png';
 
-const { settings, title, content, phoneNumber } = Astro.props;
+const { settings, title, content } = Astro.props;
 ---
 
 <section
@@ -27,7 +27,7 @@ const { settings, title, content, phoneNumber } = Astro.props;
       id='whatsapp-cta-btn'
       type='button'
       class='bs-btn bs-btn-cta self-start bs-mt-sm'
-      data-phone-number={phoneNumber}
+      data-phone-number={settings.customer_service_number}
     >
       Agenda una demo
     </button>
