@@ -4,6 +4,15 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - '**/*.png'
+      - '**/*.jpg'
+      - '**/*.jpeg'
+      - '**/*.webp'
+      - '**/*.svg'
+      - '**/*.gif'
 
 permissions:
   contents: write
@@ -14,6 +23,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     steps:
       - name: Checkout your repository
         uses: actions/checkout@v4
@@ -35,7 +45,7 @@ jobs:
           node-version: 20.11.0
 
   optimize-images:
-    needs: build
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout your repository
@@ -46,16 +56,9 @@ jobs:
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Commit optimized images
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add .
-          git commit -m "Optimize images [bot]" || echo "No changes to commit"
-          git push
-
   deploy:
-    needs: optimize-images
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
